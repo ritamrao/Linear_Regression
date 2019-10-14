@@ -1,0 +1,6 @@
+theta , Cost_J = gradientDescent(X, y)
+print('theta: ',theta.ravel())
+
+plt.plot(Cost_J)
+plt.ylabel('Cost J')
+plt.xlabel('Iterations');
