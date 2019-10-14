@@ -1,0 +1,2 @@
+def warmUpExercise():
+    return(np.identity(5))
