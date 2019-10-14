@@ -1,0 +1,27 @@
+B0 = np.linspace(-10, 10, 50)
+B1 = np.linspace(-1, 4, 50)
+xx, yy = np.meshgrid(B0, B1, indexing='xy')
+Z = np.zeros((B0.size,B1.size))
+
+
+for (i,j),v in np.ndenumerate(Z):
+    Z[i,j] = computeCost(X,y, theta=[[xx[i,j]], [yy[i,j]]])
+
+fig = plt.figure(figsize=(15,6))
+ax1 = fig.add_subplot(121)
+ax2 = fig.add_subplot(122, projection='3d')
+
+
+CS = ax1.contour(xx, yy, Z, np.logspace(-2, 3, 20), cmap=plt.cm.jet)
+ax1.scatter(theta[0],theta[1], c='r')
+
+
+ax2.plot_surface(xx, yy, Z, rstride=1, cstride=1, alpha=0.6, cmap=plt.cm.jet)
+ax2.set_zlabel('Cost')
+ax2.set_zlim(Z.min(),Z.max())
+ax2.view_init(elev=15, azim=230)
+
+
+for ax in fig.axes:
+    ax.set_xlabel(r'$\theta_0$', fontsize=17)
+    ax.set_ylabel(r'$\theta_1$', fontsize=17)
